@@ -15,16 +15,6 @@ export async function getServerSideProps(context) {
   // watch it again video
   const { userId, token } = redirectUser(context);
 
-  // if (!userId) {
-  //   return {
-  //     props: {},
-  //     redirect: {
-  //       destination: "/login",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
-
   const getVideo = await getWatchItAgainVideos(userId, token);
   const watchedItAgainVideos = getVideo ? getVideo : [];
 
@@ -70,21 +60,25 @@ export default function Home({
             imgUrl='/static/images/clifford.webp'
           />
           <div className={styles.sectionWrapper}>
-            {/* <SectionCards
-              title='Disney'
-              videos={disneyVideos || []}
-              size='large'
-            />
-            <SectionCards
-              title='Travel'
-              videos={travelVideos || []}
-              size='small'
-            />
+            {disneyVideos.length !== 0 && (
+              <SectionCards
+                title='Disney'
+                videos={disneyVideos || []}
+                size='large'
+              />
+            )}
+            {productivityVideos.length !== 0 && (
+              <SectionCards
+                title='Travel'
+                videos={travelVideos || []}
+                size='small'
+              />
+            )}
             <SectionCards
               title='Productivity'
               videos={productivityVideos || []}
               size='medium'
-            /> */}
+            />
             <SectionCards
               title='Watch It Again'
               videos={watchedItAgainVideos || []}

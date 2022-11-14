@@ -13,18 +13,6 @@ function MyApp({ Component, pageProps }) {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(() => {
-  //   const checkLoggedIn = async () => {
-  //     const isLoggedIn = await m.user.isLoggedIn();
-  //     if (isLoggedIn) {
-  //       router.push("/");
-  //     } else {
-  //       router.push("/login");
-  //     }
-  //   };
-  //   checkLoggedIn();
-  // }, [router]);
-
   useEffect(() => {
     const handleComplete = () => {
       setIsLoading(false);

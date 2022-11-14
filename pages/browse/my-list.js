@@ -12,16 +12,6 @@ export async function getServerSideProps(context) {
   // watch it again video
   const { userId, token } = redirectUser(context);
 
-  // if (!userId) {
-  //   return {
-  //     props: {},
-  //     redirect: {
-  //       destination: "/login",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
-
   const getVideo = await getFavouritedVideos(userId, token);
   const myListVideos = getVideo ? getVideo : [];
 
