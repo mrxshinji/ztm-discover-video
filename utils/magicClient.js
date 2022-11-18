@@ -4,12 +4,11 @@ const createMagic = () => {
   return typeof window !== "undefined" && new Magic(process.env.NEXT_PUBLIC_MAGIC_P_KEY);
 };
 
-export const m = createMagic()
+export const m = createMagic();
 
 export const loginInWithMagicLink = async (email) => {
     try {
         console.log('server log loginWithMagicLink', email)
-        console.log({pkey: process.env.NEXT_PUBLIC_MAGIC_P_KEY, m })
         const didToken = await m.auth.loginWithMagicLink({ email })
         console.log({didToken})
         return didToken
