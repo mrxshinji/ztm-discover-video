@@ -44,19 +44,15 @@ export default function Login() {
 
   const handleLoginWithEmail = async (e) => {
     e.preventDefault();
-    console.log('button clicked')
     if (!inputEmail) {
       setUserMsg("Empty input, please enter a valid email address");
       setIsLoading(false);
     }
-    console.log({inputEmail}, isEmail(inputEmail) )
     if (isEmail(inputEmail) && inputEmail) {
       try {
         setIsLoading(true);
         const didToken = await loginInWithMagicLink(inputEmail);
-        console.log({loginToken: didToken})
         if (didToken) {
-          console.log('response fired')
           const response = await fetch("/api/login", {
             method: "POST",
             headers: {
@@ -64,9 +60,11 @@ export default function Login() {
               "Content-Type": `application/json`,
             },
           });
+
           const loggedInResponse = await response.json();
-          console.log({loggedInResponse})
+          console.log({ loggedInResponse });
           if (loggedInResponse.done) {
+            console.log("firing router push");
             router.push("/");
           } else {
             setIsLoading(false);

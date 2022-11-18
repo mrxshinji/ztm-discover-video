@@ -5,7 +5,7 @@ import { verifyToken } from "./utils/helper";
 export async function middleware(req, ev) {
   //if token is valid
   const token = req ? req.cookies.get("token") : null;
-  const userId = await verifyToken(token);
+  const userId = await verifyToken(token?.value);
   const { pathname } = req.nextUrl;
 
   if (
@@ -27,5 +27,3 @@ export async function middleware(req, ev) {
     return NextResponse.redirect('/login')
   }
 }
-  
-

@@ -14,8 +14,7 @@ import { redirectUser } from "../utils/redirectUser";
 export async function getServerSideProps(context) {
   // watch it again video
   const { userId, token } = redirectUser(context);
-
-  const getVideo = await getWatchItAgainVideos(userId, token);
+  const getVideo = await getWatchItAgainVideos(userId, token.toString());
   const watchedItAgainVideos = getVideo ? getVideo : [];
 
   // each section video

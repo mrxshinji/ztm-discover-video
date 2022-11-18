@@ -11,7 +11,7 @@ export const redirectUser = (context) => {
       },
     };
   }
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const decoded = jwt.verify(token.toString(), process.env.JWT_SECRET);
   const userId = decoded.issuer;
 
   if (!userId) {
@@ -25,6 +25,6 @@ export const redirectUser = (context) => {
   }
   return {
     userId,
-    token
-  }
+    token,
+  };
 };

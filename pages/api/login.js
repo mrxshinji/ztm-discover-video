@@ -15,7 +15,7 @@ export default async function login(req, res) {
       // return { metadata: {issuer, publicAddress, email}}
       //get magicData and turn into jwt
       const token = jwt.sign(
-        {
+        JSON.stringify({
           ...metadata,
           iat: Math.floor(Date.now() / 1000),
           exp: Math.floor(Date.now() / 1000 + 7 * 24 * 60 * 60),
@@ -24,14 +24,14 @@ export default async function login(req, res) {
             "x-hasura-default-role": "user",
             "x-hasura-user-id": `${metadata.issuer}`,
           },
-        },
+        }),
         process.env.JWT_SECRET
       );
-
       // return string of token obj
       const isNewUserQuery = await isNewUser(metadata.issuer, token);
-      isNewUserQuery && (await createNewUser(metadata, token));
-      setTokenCookie(token, res);
+      isNewUserQuery && (await createNewUser(metadata, token.toString()));
+
+      setTokenCookie(token.toString(), res);
       res.send({ done: true });
     } catch (err) {
       console.error("Login went wrong.....", err);
